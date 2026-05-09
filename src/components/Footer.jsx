@@ -8,7 +8,7 @@ function Footer() {
         <p>© {new Date().getFullYear()} Karthik. All rights reserved.</p>
         <div className="flex items-center gap-4">
           <motion.a
-            href="https://github.com/Asapukarthik"
+            href="https://github.com/asapukarthik"
             target="_blank"
             rel="noreferrer"
             whileHover={{ y: -5, scale: 1.12 }}
@@ -17,7 +17,7 @@ function Footer() {
             <FaGithub />
           </motion.a>
           <motion.a
-            href="https://linkedin.com/"
+            href="https://www.linkedin.com/in/venkata-veera-hanuma-karthik-asapu-78ba6a256/"
             target="_blank"
             rel="noreferrer"
             whileHover={{ y: -5, scale: 1.12 }}
