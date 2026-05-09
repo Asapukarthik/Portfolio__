@@ -45,7 +45,7 @@ function Hero() {
 
   return (
     <section id="home" className="relative flex min-h-screen w-full items-center justify-center overflow-hidden pt-20">
-      
+
       <BackgroundSphere />
 
       {/* ─── Floating Social Bar (Right) ─── */}
@@ -75,7 +75,7 @@ function Hero() {
       {/* ─── Hero Content Grid ─── */}
       <motion.div
         style={{ opacity: heroOpacity, y: heroY }}
-        className="relative z-10 mx-auto grid max-w-7xl w-full grid-cols-1 items-center gap-12 px-6 lg:grid-cols-2"
+        className="relative z-10 mx-auto grid max-w-7xl w-full grid-cols-1 items-center gap-12 px-4 lg:grid-cols-2 lg:pl-0"
       >
         {/* Radial glow behind heading */}
         <div className="pointer-events-none absolute left-0 top-1/2 -z-10 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-purple-700/25 blur-[120px]" />
@@ -88,9 +88,8 @@ function Hero() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="mb-4 flex items-center gap-3 text-sm font-semibold tracking-widest text-purple-400 uppercase"
+            className="mb-4 text-sm font-semibold tracking-widest text-purple-400 uppercase"
           >
-            <span className="h-px w-8 bg-gradient-to-r from-transparent to-purple-500" />
             Hello, I&apos;m
           </motion.div>
 
@@ -99,10 +98,10 @@ function Hero() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.8, ease: 'easeOut' }}
-            className="mb-4 text-6xl font-black leading-tight tracking-tighter sm:text-7xl lg:text-8xl xl:text-9xl"
+            className="mb-4 text-2xl font-black leading-tight tracking-tighter sm:text-4xl md:text-5xl xl:text-6xl"
           >
             <span className="bg-gradient-to-r from-purple-400 via-violet-300 to-blue-400 bg-clip-text text-transparent drop-shadow-[0_0_60px_rgba(168,85,247,0.3)]">
-              Karthik
+              Venkata Veera Hanuma Karthik Asapu
             </span>
           </motion.h1>
 

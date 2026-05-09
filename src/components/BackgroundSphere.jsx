@@ -108,8 +108,14 @@ const BackgroundSphere = () => {
         const viewerDist = 1000;
         const scale = fov / (viewerDist + z3d);
 
-        this.x = canvas.width / 2 + x3d * scale;
-        this.y = canvas.height / 2 + y3d * scale;
+        const targetX = canvas.width / 2 + x3d * scale;
+        const targetY = canvas.height / 2 + y3d * scale;
+
+        if (this.x === undefined || this.y === undefined) {
+          this.x = targetX;
+          this.y = targetY;
+        }
+
         this.currentSize = Math.max(0.1, this.size * scale);
 
         if (mouse.x !== null && mouse.y !== null) {
@@ -119,10 +125,15 @@ const BackgroundSphere = () => {
 
           if (dist < mouse.radius) {
             let force = (mouse.radius - dist) / mouse.radius;
-            this.x -= dx * force * 0.1;
-            this.y -= dy * force * 0.1;
+            // Push particles away smoothly
+            this.x -= dx * force * 0.15;
+            this.y -= dy * force * 0.15;
           }
         }
+
+        // Smoothly return to the target position (easing)
+        this.x += (targetX - this.x) * 0.08;
+        this.y += (targetY - this.y) * 0.08;
 
         this.draw();
       }
