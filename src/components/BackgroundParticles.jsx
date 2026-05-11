@@ -7,115 +7,81 @@ const BackgroundParticles = () => {
     await loadFull(engine);
   }, []);
 
-  const particlesLoaded = useCallback(
-    async (container) => {
-      // console.log(container);
-    },
-    []
-  );
-
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 bg-[#030008]">
-      {/* Deep ambient glows to maintain the UI's cinematic feel */}
-      <div className="absolute left-0 top-1/2 h-[800px] w-[800px] -translate-x-1/3 -translate-y-1/2 rounded-full bg-purple-600/20 blur-[150px]" />
-      <div className="absolute right-0 top-1/2 h-[800px] w-[800px] translate-x-1/3 -translate-y-1/2 rounded-full bg-blue-600/20 blur-[150px]" />
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {/* Subtle cinematic ambient lighting (Cyberpunk/Tech feel) */}
+      <div className="absolute left-1/4 top-1/4 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-[120px]" />
+      <div className="absolute right-1/4 bottom-1/4 h-[800px] w-[800px] translate-x-1/2 translate-y-1/2 rounded-full bg-cyan-900/10 blur-[150px]" />
 
       <Particles
-        id="backgroundParticles"
+        id="neuralNetworkParticles"
         init={particlesInit}
-        loaded={particlesLoaded}
         className="absolute inset-0"
         options={{
-          fullScreen: {
-            enable: false,
-          },
-
-          background: {
-            color: "transparent", // Use transparent to let the glows and dark background show
-          },
-
+          fullScreen: { enable: false },
+          background: { color: "transparent" },
           fpsLimit: 60,
-
           interactivity: {
             events: {
-              onClick: {
-                enable: true,
-                mode: "push",
-              },
-
               onHover: {
                 enable: true,
-                mode: "repulse",
+                mode: "grab", // Creates connections to the mouse like a neural net
               },
-
               resize: true,
             },
-
             modes: {
-              push: {
-                quantity: 4,
-              },
-
-              repulse: {
-                distance: 120,
-                duration: 0.4,
+              grab: {
+                distance: 250,
+                links: { opacity: 0.4 },
               },
             },
           },
-
           particles: {
-            color: {
-              // Set the coloring based on the UI (Neon Purple, Blue, Pink, Cyan)
-              value: ["#00f3ff", "#ff00e5", "#9d00ff", "#a855f7", "#3b82f6"],
-            },
-
+            color: { value: "#ffffff" }, // Tiny glowing white particles
             links: {
-              color: "#a855f7", // Subtle purple connecting lines
-              distance: 150,
+              color: "#ffffff",
+              distance: 160,
               enable: true,
-              opacity: 0.25,
+              opacity: 0.35, // Increased from 0.15 for better visibility
               width: 1,
+              triangles: {
+                enable: true,
+                opacity: 0.08, // Increased for visible polygon structures
+              },
             },
-
-            collisions: {
-              enable: false,
-            },
-
+            collisions: { enable: false },
             move: {
               direction: "none",
               enable: true,
-              outModes: {
-                default: "bounce",
-              },
-              random: false,
-              speed: 1.5,
+              outModes: { default: "bounce" },
+              random: true,
+              speed: 0.6, // Float smoothly with soft motion
               straight: false,
             },
-
             number: {
-              density: {
-                enable: true,
-                area: 800,
-              },
-              value: 70,
+              density: { enable: false }, // Must be false for tall containers to prevent density-scaling crash
+              value: 450, // Hard limit of 450 particles across the entire height
             },
-
             opacity: {
-              value: 0.6,
+              value: { min: 0.1, max: 0.8 },
+              animation: {
+                enable: true,
+                speed: 1,
+                minimumValue: 0.1,
+                sync: false,
+              },
             },
-
-            shape: {
-              type: "circle",
-            },
-
+            shape: { type: "circle" },
             size: {
-              value: {
-                min: 1.5,
-                max: 3.5,
+              value: { min: 1, max: 2.5 },
+              animation: {
+                enable: true,
+                speed: 2,
+                minimumValue: 0.5,
+                sync: false,
               },
             },
           },
-
           detectRetina: true,
         }}
       />

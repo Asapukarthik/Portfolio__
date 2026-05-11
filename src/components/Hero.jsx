@@ -5,13 +5,11 @@ import { FiArrowRight } from 'react-icons/fi'
 import profileImg from '../assets/profile .jpg'
 import BackgroundSphere from './BackgroundSphere'
 
-const roles = ['Full Stack Developer', 'MERN Enthusiast', 'Cloud Learner']
-
+const roles = ['Full Stack Developer', 'MERN Enthusiast', 'ML Enthusiast', "Data Science Enthusiast"]
 const socialLinks = [
-  { icon: FaGithub, href: 'https://github.com', label: 'GitHub' },
-  { icon: FaLinkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-  { icon: FaTwitter, href: 'https://twitter.com', label: 'Twitter' },
-  { icon: FaEnvelope, href: 'mailto:karthik@example.com', label: 'Email' },
+  { icon: FaGithub, href: 'https://github.com/asapukarthik', label: 'GitHub' },
+  { icon: FaLinkedin, href: 'https://www.linkedin.com/in/venkata-veera-hanuma-karthik-asapu-78ba6a256/', label: 'LinkedIn' },
+  { icon: FaEnvelope, href: 'mailto:[karthikasapu21@gmail.com]', label: 'Email' },
 ]
 
 function Hero() {

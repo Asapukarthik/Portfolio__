@@ -14,7 +14,6 @@ import Skills from './components/Skills'
 function App() {
   return (
     <div className="min-h-screen overflow-x-hidden text-slate-100 selection:bg-purple-500/30">
-      <BackgroundParticles />
       <CursorGlowTrail />
       <Navbar />
       <motion.main
@@ -23,14 +22,19 @@ function App() {
         transition={{ duration: 1.2 }}
       >
         <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Resume />
-        <Contact />
+        <div className="relative w-full bg-black z-0">
+          <BackgroundParticles />
+          <div className="relative z-10">
+            <About />
+            <Skills />
+            <Projects />
+            <Experience />
+            <Resume />
+            <Contact />
+            <Footer />
+          </div>
+        </div>
       </motion.main>
-      <Footer />
     </div>
   )
 }

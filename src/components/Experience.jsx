@@ -26,15 +26,18 @@ const timeline = [
 
 function Experience() {
   return (
-    <section id="experience" className="section-container">
+    <section id="experience" className="section-container flex min-h-screen items-center py-20">
       <motion.div
-        initial={{ opacity: 0, y: 22 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.45 }}
+        className="mx-auto w-full max-w-4xl"
       >
-        <h2 className="text-3xl font-bold gradient-text">Experience & Education</h2>
-        <div className="relative mt-12 space-y-8 border-l border-fuchsia-300/30 pl-8">
+        <div className="mb-16 text-center">
+          <h2 className="mb-6 text-4xl font-bold tracking-tight text-white md:text-5xl">Experience & Education</h2>
+        </div>
+        <div className="space-y-6">
           {timeline.map((item, index) => (
             <motion.div
               key={item.title}
@@ -42,15 +45,20 @@ function Experience() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="glass-card relative p-6"
+              className="group rounded-2xl border border-white/10 bg-transparent p-8 transition-all duration-300 hover:-translate-y-1 hover:border-purple-500/30 hover:bg-white/5"
             >
-              <span className="absolute -left-[41px] top-7 h-5 w-5 rounded-full border-2 border-fuchsia-300 bg-slate-900 shadow-[0_0_16px_rgba(232,121,249,0.9)]" />
-              <p className="text-xs uppercase tracking-widest text-cyan-300">
-                {item.period}
-              </p>
-              <h3 className="mt-2 text-xl font-semibold text-white">{item.title}</h3>
-              <p className="text-sm text-fuchsia-200">{item.subtitle}</p>
-              <p className="mt-3 text-slate-300">{item.description}</p>
+              <div className="flex flex-col justify-between md:flex-row md:items-center">
+                <div>
+                  <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+                  <p className="mt-1 text-sm font-medium text-purple-400">{item.subtitle}</p>
+                </div>
+                <div className="mt-4 md:mt-0">
+                  <span className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold tracking-wider text-slate-300">
+                    {item.period}
+                  </span>
+                </div>
+              </div>
+              <p className="mt-6 text-sm leading-relaxed text-slate-400">{item.description}</p>
             </motion.div>
           ))}
         </div>
