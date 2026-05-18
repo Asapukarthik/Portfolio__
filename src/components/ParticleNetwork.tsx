@@ -5,8 +5,8 @@ import * as THREE from "three";
 const ParticleNetwork = ({ count = 120 }) => {
   const { viewport, mouse } = useThree();
 
-  const pointsRef = useRef();
-  const linesRef = useRef();
+  const pointsRef = useRef<THREE.Points>(null);
+  const linesRef = useRef<THREE.LineSegments>(null);
 
   // Create particles
   const particles = useMemo(() => {

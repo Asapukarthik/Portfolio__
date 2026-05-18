@@ -11,16 +11,35 @@ const containerVariants = {
   }
 }
 
+interface Project {
+  title: string;
+  subtitle: string;
+  description: string[];
+  techStack: string[];
+  image: string;
+  github: string;
+  liveDemo?: string;
+  glow: string;
+  color: string;
+  textColor: string;
+  borderColor: string;
+  bgColor: string;
+}
+
+interface ProjectCardProps {
+  project: Project;
+}
+
 const cardVariants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const }
   }
 }
 
-function ProjectCard({ project }) {
+function ProjectCard({ project }: ProjectCardProps) {
   const [rotate, setRotate] = useState({ x: 0, y: 0 })
   const [glowPos, setGlowPos] = useState({ x: 50, y: 50 })
   const [isHovered, setIsHovered] = useState(false)

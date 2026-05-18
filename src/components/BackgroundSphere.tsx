@@ -60,6 +60,17 @@ const BackgroundSphere = () => {
     window.addEventListener("resize", handleResize);
 
     class Particle {
+      phi: number;
+      theta: number;
+      radiusOffset: number;
+      baseRadiusRatio: number;
+      color: string;
+      size: number;
+      rotSpeed: number;
+      x!: number;
+      y!: number;
+      currentSize!: number;
+
       constructor() {
         const u = Math.random();
         const v = Math.random();

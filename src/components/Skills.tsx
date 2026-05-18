@@ -106,11 +106,11 @@ const cardVariants = {
   hidden: { opacity: 0, y: 20, scale: 0.95 },
   visible: {
     opacity: 1, y: 0, scale: 1,
-    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }
+    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }
   }
 }
 
-function SkillCard({ name }) {
+function SkillCard({ name }: { name: string }) {
   const Icon = skillIcons[name] || FaDatabase
   const color = skillColors[name] || '#a78bfa'
 

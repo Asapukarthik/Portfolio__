@@ -54,7 +54,7 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }
+    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }
   }
 }
 
@@ -102,7 +102,7 @@ function Contact() {
 
     // Replace the placeholder below with your real Formspree Form ID!
     // Simply sign up for free at https://formspree.io/, create a form, and copy the Form ID here.
-    const FORMSPREE_FORM_ID = 'xeedqzbv'
+    const FORMSPREE_FORM_ID: string = 'xeedqzbv'
 
     if (FORMSPREE_FORM_ID === 'YOUR_FORMSPREE_FORM_ID') {
       // If they haven't set up their ID yet, we'll simulate the successful submission 
