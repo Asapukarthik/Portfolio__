@@ -9,7 +9,7 @@ const roles = ['Full Stack Developer', 'MERN Enthusiast', 'ML Enthusiast', "Data
 const socialLinks = [
   { icon: FaGithub, href: 'https://github.com/asapukarthik', label: 'GitHub' },
   { icon: FaLinkedin, href: 'https://www.linkedin.com/in/venkata-veera-hanuma-karthik-asapu-78ba6a256/', label: 'LinkedIn' },
-  { icon: FaEnvelope, href: 'mailto:[karthikasapu21@gmail.com]', label: 'Email' },
+  { icon: FaEnvelope, href: 'mailto:karthikasapu21@gmail.com', label: 'Email' },
 ]
 
 function Hero() {
@@ -96,7 +96,7 @@ function Hero() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.8, ease: 'easeOut' }}
-            className="mb-4 text-2xl font-black leading-tight tracking-tighter sm:text-4xl md:text-5xl xl:text-6xl"
+            className="mb-4 text-xl font-black leading-tight tracking-tighter sm:text-3xl md:text-4xl xl:text-5xl"
           >
             <span className="bg-gradient-to-r from-purple-400 via-violet-300 to-blue-400 bg-clip-text text-transparent drop-shadow-[0_0_60px_rgba(168,85,247,0.3)]">
               Venkata Veera Hanuma Karthik Asapu
@@ -165,7 +165,7 @@ function Hero() {
             {/* Glow Background */}
             <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-purple-600 via-blue-500 to-transparent opacity-30 blur-2xl transition duration-700 group-hover:opacity-60 group-hover:blur-3xl" />
 
-            <div className="relative h-[300px] w-[300px] overflow-hidden rounded-full border-2 border-white/10 shadow-2xl sm:h-[400px] sm:w-[400px]">
+            <div className="relative h-[240px] w-[240px] overflow-hidden rounded-full border-2 border-white/10 shadow-2xl sm:h-[320px] sm:w-[320px]">
               <img
                 src={profileImg}
                 alt="Karthik profile"

@@ -34,25 +34,35 @@ function Navbar() {
   }, [])
 
   useEffect(() => {
-    const ids = navLinks.map((link) => link.href.replace('#', ''))
-    const elements = ids
-      .map((id) => document.getElementById(id))
-      .filter(Boolean)
+    const handleScrollActive = () => {
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(`#${entry.target.id}`)
+      const ids = navLinks.map(link => link.href);
+      let currentSection = activeSection;
+
+      for (let i = ids.length - 1; i >= 0; i--) {
+        const section = document.querySelector(ids[i]);
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          const absoluteTop = rect.top + window.scrollY;
+          if (absoluteTop <= scrollPosition) {
+            currentSection = ids[i];
+            break;
           }
-        })
-      },
-      { rootMargin: '-40% 0px -40% 0px', threshold: 0.1 },
-    )
+        }
+      }
 
-    elements.forEach((element) => observer.observe(element))
-    return () => observer.disconnect()
-  }, [])
+      if (currentSection !== activeSection) {
+        setActiveSection(currentSection);
+      }
+    };
+
+    window.addEventListener('scroll', handleScrollActive);
+    // Call once to set initial state
+    handleScrollActive();
+
+    return () => window.removeEventListener('scroll', handleScrollActive);
+  }, [activeSection])
 
   const handleThemeToggle = () => {
     const nextTheme = theme === 'dark' ? 'light' : 'dark'
@@ -95,18 +105,13 @@ function Navbar() {
           {/* Right Actions */}
           <div className="flex items-center gap-4">
             <a
-              href="/resume.pdf"
+              href="/Karthik_Resume___.pdf"
               className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-xs font-bold text-white transition-all hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] md:flex"
             >
               Download CV <FiDownload size={14} />
             </a>
 
-            <button
-              onClick={handleThemeToggle}
-              className="rounded-full border border-white/10 bg-white/5 p-2 text-white transition-all hover:scale-110 active:scale-95"
-            >
-              {theme === 'dark' ? <HiSun size={20} /> : <HiMoon size={20} />}
-            </button>
+
 
             <button
               className="rounded-full border border-white/10 bg-white/5 p-2 text-white lg:hidden"
@@ -142,7 +147,7 @@ function Navbar() {
               ))}
               <li className="mt-4">
                 <a
-                  href="/resume.pdf"
+                  href="/Karthik_Resume___.pdf"
                   className="flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-4 py-4 text-sm font-bold text-black"
                 >
                   Download CV <FiDownload size={18} />
