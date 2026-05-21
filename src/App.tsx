@@ -3,6 +3,7 @@ import About from './components/About'
 import BackgroundParticles from './components/BackgroundParticles'
 import Contact from './components/Contact'
 import CursorGlowTrail from './components/CursorGlowTrail'
+import Education from './components/Education'
 import Experience from './components/Experience'
 import Footer from './components/Footer'
 import Hero from './components/Hero'
@@ -39,6 +40,8 @@ function App() {
             <Projects />
             <div className="section-divider" />
             <Experience />
+            <div className="section-divider" />
+            <Education />
             <div className="section-divider" />
             <Resume />
             <div className="section-divider" />

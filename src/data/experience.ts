@@ -1,6 +1,19 @@
 import { FaGraduationCap, FaBriefcase } from 'react-icons/fa'
 
-export const timeline = [
+export const experiences = [
+  {
+    title: 'Artificial Intelligence / Machine Learning Intern',
+    subtitle: 'SmartBridge Pvt. Ltd.',
+    period: 'Dec 2025 – Feb 2026',
+    location: 'Remote',
+    description: [
+      'Gained hands-on experience in AI/ML, data analysis, and model development using Python. Worked on real-world machine learning applications and intelligent systems.',
+      'Explored data preprocessing, model training, evaluation, and deployment concepts. Strengthened problem-solving and analytical skills through project-based learning.'
+    ],
+    icon: FaBriefcase,
+    color: 'from-blue-500 to-cyan-600',
+    glow: 'rgba(59, 130, 246, 0.25)',
+  },
   {
     title: 'Full Stack Developer Intern (MERN)',
     subtitle: 'SmartBridge Pvt. Ltd. x APSCHE',
@@ -14,7 +27,10 @@ export const timeline = [
     icon: FaBriefcase,
     color: 'from-purple-500 to-indigo-600',
     glow: 'rgba(168, 85, 247, 0.25)',
-  },
+  }
+]
+
+export const educations = [
   {
     title: 'Aditya College of Engineering and Technology',
     subtitle: 'B.Tech in CSE (Internet of Things) — CGPA: 7.2',

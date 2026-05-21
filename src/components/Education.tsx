@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { experiences } from '../data/experience'
+import { educations } from '../data/experience'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -18,9 +18,9 @@ const itemVariants = {
   }
 }
 
-function Experience() {
+function Education() {
   return (
-    <section id="experience" className="section-container flex min-h-screen items-center py-24">
+    <section id="education" className="section-container flex min-h-screen items-center py-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -29,7 +29,7 @@ function Experience() {
         className="mx-auto w-full max-w-4xl"
       >
         <div className="mb-16 text-center">
-          <h2 className="section-heading">Experience</h2>
+          <h2 className="section-heading">Education</h2>
           <div className="section-heading-line" />
         </div>
 
@@ -44,7 +44,7 @@ function Experience() {
           <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-purple-500/40 via-cyan-500/20 to-transparent hidden md:block" />
 
           <div className="space-y-8">
-            {experiences.map((item, index) => (
+            {educations.map((item, index) => (
               <motion.div
                 key={item.title}
                 variants={itemVariants}
@@ -130,4 +130,4 @@ function Experience() {
   )
 }
 
-export default Experience
+export default Education
