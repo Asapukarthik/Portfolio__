@@ -28,7 +28,7 @@ function Resume() {
           </p>
           <MagneticButton
             type="button"
-            onClick={() => window.open('/Karthik_Resume___.pdf', '_blank')}
+            onClick={() => window.open('/karthik_asapu_resume.pdf', '_blank')}
             className="group inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-purple-600 to-violet-600 px-10 py-4 font-semibold text-white shadow-[0_0_25px_rgba(168,85,247,0.25)] transition-all hover:shadow-[0_0_40px_rgba(168,85,247,0.4)] hover:brightness-110"
           >
             Download CV

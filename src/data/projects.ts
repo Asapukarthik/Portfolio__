@@ -11,7 +11,7 @@ export const projects = [
     techStack: ['Next.js', 'Node.js', 'Express.js', 'MongoDB', 'NLP', 'AI Models'],
     image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=1200&q=80',
     github: 'https://github.com/',
-    liveDemo: 'https://example.com/',
+    liveDemo: 'https://ai-powered-resume-analyzer-taupe.vercel.app/',
     glow: 'rgba(168, 85, 247, 0.25)',
     color: 'from-purple-500 to-indigo-600',
     textColor: 'text-purple-300',

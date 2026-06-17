@@ -86,12 +86,19 @@ const categoryIcons = {
 }
 
 const groupAccents = {
-  'Frontend': '#61DAFB', // Cyan
-  'Backend': '#339933',  // Green
-  'Database': '#0ea5e9', // Light Blue
-  'Machine Learning': '#FF6F00', // Orange
-  'Tools': '#f43f5e',    // Rose
-  'Languages': '#a855f7', // Purple
+  Frontend: "#06B6D4",
+  Backend: "#7C3AED",
+  Database: "#3B82F6",
+  "Machine Learning": "#F97316",
+  Tools: "#EC4899",
+  Languages: "#8B5CF6",
+
+  // 'Frontend': '#61DAFB', // Cyan
+  // 'Backend': '#339933',  // Green
+  // 'Database': '#0ea5e9', // Light Blue
+  // 'Machine Learning': '#FF6F00', // Orange
+  // 'Tools': '#f43f5e',    // Rose
+  // 'Languages': '#a855f7', // Purple
 }
 
 const containerVariants = {
@@ -149,7 +156,14 @@ function SkillCard({ name }: { name: string }) {
 
 function Skills() {
   return (
-    <section id="skills" className="section-container flex min-h-screen items-center py-24">
+    // <section id="skills" className="section-container flex min-h-screen items-center py-24">
+    <section
+      id="skills"
+      className="relative overflow-hidden section-container flex min-h-screen items-center py-24"
+    >
+      <div className="absolute left-0 top-0 h-96 w-96 rounded-full bg-cyan-500/10 blur-[120px]" />
+
+      <div className="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-violet-500/10 blur-[120px]" />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -179,7 +193,7 @@ function Skills() {
               <motion.div
                 key={group.title}
                 variants={cardVariants}
-                whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.3, ease: 'easeOut' } }}
+                whileHover={{ y: -10, scale: 1.03, transition: { duration: 0.25, ease: 'easeOut' } }}
                 className="group/category relative flex flex-col rounded-3xl border p-7 transition-all duration-500 overflow-hidden cursor-pointer"
                 style={{
                   borderColor: `${accent}40`,
