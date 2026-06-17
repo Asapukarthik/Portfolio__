@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import { skillGroups } from '../data/skills'
+import { GlowCard } from './GlowCard'
+import { createCategoryGlow, createIconGlow, useGlowHover } from '../utils/glowHover'
 
 import {
   SiReact, SiJavascript, SiExpress, SiMongodb, SiTypescript, SiTailwindcss, SiNestjs,
@@ -120,6 +122,7 @@ const cardVariants = {
 function SkillCard({ name }: { name: string }) {
   const Icon = skillIcons[name] || FaDatabase
   const color = skillColors[name] || '#a78bfa'
+  const { style, onMouseEnter, onMouseLeave } = useGlowHover(createIconGlow(color))
 
   return (
     <div className="relative group">
@@ -127,19 +130,9 @@ function SkillCard({ name }: { name: string }) {
         variants={cardVariants}
         whileHover={{ y: -4, scale: 1.05, transition: { duration: 0.2 } }}
         className="flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-2xl border bg-[#13131c] transition-all duration-300 hover:bg-[#1a1a26]"
-        style={{
-          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-          borderColor: `${color}35`,
-          boxShadow: `0 0 12px ${color}08`
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = `${color}90`;
-          e.currentTarget.style.boxShadow = `0 0 20px ${color}45`;
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = `${color}35`;
-          e.currentTarget.style.boxShadow = `0 0 12px ${color}08`;
-        }}
+        style={style}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
       >
         <Icon
           className="text-[2rem] transition-all duration-300 group-hover:scale-110"
@@ -190,49 +183,26 @@ function Skills() {
             const accent = groupAccents[group.title] || '#a78bfa';
 
             return (
-              <motion.div
+              <GlowCard
                 key={group.title}
                 variants={cardVariants}
                 whileHover={{ y: -10, scale: 1.03, transition: { duration: 0.25, ease: 'easeOut' } }}
-                className="group/category relative flex flex-col rounded-3xl border p-7 transition-all duration-500 overflow-hidden cursor-pointer"
-                style={{
-                  borderColor: `${accent}40`,
-                  boxShadow: `0 0 25px ${accent}12`,
-                  transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = `${accent}90`;
-                  e.currentTarget.style.boxShadow = `0 0 35px ${accent}25`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = `${accent}40`;
-                  e.currentTarget.style.boxShadow = `0 0 25px ${accent}12`;
-                }}
+                glow={accent}
+                hover={createCategoryGlow(accent)}
+                ambient={{ bottomBase: 10, topBase: 5, bottomHover: 80, topHover: 55 }}
+                className="flex flex-col rounded-3xl border p-7 cursor-pointer"
               >
-                {/* Opaque Solid Background - Space Indigo to prevent blending with pure black body */}
-                <div className="absolute inset-0 -z-20 bg-[#0e0e16] transition-colors duration-500 group-hover/category:bg-[#151522]" />
-
-                {/* Double Blurred Ambient Glows */}
-                <div
-                  className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full opacity-10 blur-[80px] transition-opacity duration-700 group-hover/category:opacity-80 pointer-events-none -z-10"
-                  style={{ background: `radial-gradient(circle, ${accent}, transparent 70%)` }}
-                />
-                <div
-                  className="absolute -top-24 -right-24 h-64 w-64 rounded-full opacity-5 blur-[80px] transition-opacity duration-700 group-hover/category:opacity-55 pointer-events-none -z-10"
-                  style={{ background: `radial-gradient(circle, ${accent}, transparent 70%)` }}
-                />
-
-                <h3 className="mb-7 flex items-center gap-3 text-base font-bold tracking-wide text-slate-100">
+                <h3 className="relative z-10 mb-7 flex items-center gap-3 text-base font-bold tracking-wide text-slate-100">
                   <CatIcon className="text-xl" style={{ color: accent }} />
                   {group.title}
                 </h3>
 
-                <div className="flex flex-wrap gap-4">
+                <div className="relative z-10 flex flex-wrap gap-4">
                   {group.skills.map((skill) => (
                     <SkillCard key={skill.name} name={skill.name} />
                   ))}
                 </div>
-              </motion.div>
+              </GlowCard>
             )
           })}
         </motion.div>

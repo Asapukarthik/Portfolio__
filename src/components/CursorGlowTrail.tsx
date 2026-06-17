@@ -1,11 +1,41 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import cursorImg from "../assets/cursor.png"
 
-const CursorGlowTrail = () => {
-  const dotRef = useRef(null)
-  const glowRef = useRef(null)
+function useCustomCursorEnabled() {
+  const [enabled, setEnabled] = useState(false)
 
   useEffect(() => {
+    const finePointer = window.matchMedia("(pointer: fine)")
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const wideScreen = window.matchMedia("(min-width: 768px)")
+
+    const update = () => {
+      setEnabled(finePointer.matches && !reducedMotion.matches && wideScreen.matches)
+    }
+
+    update()
+    finePointer.addEventListener("change", update)
+    reducedMotion.addEventListener("change", update)
+    wideScreen.addEventListener("change", update)
+
+    return () => {
+      finePointer.removeEventListener("change", update)
+      reducedMotion.removeEventListener("change", update)
+      wideScreen.removeEventListener("change", update)
+    }
+  }, [])
+
+  return enabled
+}
+
+const CursorGlowTrail = () => {
+  const enabled = useCustomCursorEnabled()
+  const dotRef = useRef<HTMLImageElement>(null)
+  const glowRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!enabled) return
+
     const dot = dotRef.current
     const glow = glowRef.current
     if (!dot || !glow) return
@@ -21,7 +51,7 @@ const CursorGlowTrail = () => {
     let isHovering = false
     let time = 0
 
-    const onMouseMove = (e) => {
+    const onMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX
       mouseY = e.clientY
     }
@@ -34,8 +64,8 @@ const CursorGlowTrail = () => {
       isClicked = false
     }
 
-    const onMouseOver = (e) => {
-      const target = e.target
+    const onMouseOver = (e: MouseEvent) => {
+      const target = e.target as Element | null
       if (!target) return
 
       const interactive = target.closest("a, button, input, textarea, .interactive, [role='button']")
@@ -55,27 +85,21 @@ const CursorGlowTrail = () => {
     window.addEventListener("mouseup", onMouseUp, { passive: true })
     window.addEventListener("mouseover", onMouseOver, { passive: true })
 
-    // Ultra high performance render loop
-    let animationFrameId
+    let animationFrameId: number
     const tick = () => {
-      time += 0.05 // Increment time for custom breathing sine wave
+      time += 0.05
 
-      // Small inner custom pointer follows mouse coordinates
       dotX = mouseX
       dotY = mouseY
 
-      // Outer soft ring lags slightly behind for an organic fluid feel
       glowX += (mouseX - glowX) * 0.16
       glowY += (mouseY - glowY) * 0.16
 
-      // Calculate subtle breathing pulse: ranges between -0.05 and +0.05
       const breathingPulse = Math.sin(time) * 0.05
 
-      // Base scales based on hover
       let dotScale = isHovering ? 1.25 : 1.0
       let glowScale = isHovering ? (1.35 + breathingPulse) : (1.0 + breathingPulse)
 
-      // Contract scales instantly on mouse click for tactile feedback
       if (isClicked) {
         dotScale *= 0.8
         glowScale *= 0.75
@@ -96,11 +120,12 @@ const CursorGlowTrail = () => {
       window.removeEventListener("mouseover", onMouseOver)
       cancelAnimationFrame(animationFrameId)
     }
-  }, [])
+  }, [enabled])
+
+  if (!enabled) return null
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[999] hidden md:block">
-      {/* Outer soft volumetric glow circle */}
+    <div className="pointer-events-none fixed inset-0 z-[999]">
       <div
         ref={glowRef}
         className="fixed top-0 left-0 h-24 w-24 rounded-full border border-cyan-400/30 bg-cyan-400/[0.08] blur-md"
@@ -110,11 +135,11 @@ const CursorGlowTrail = () => {
           transition: "background-color 0.3s ease, border-color 0.3s ease",
         }}
       />
-      {/* Inner sharp custom cursor image pointer */}
       <img
         ref={dotRef}
         src={cursorImg}
-        alt="custom cursor"
+        alt=""
+        aria-hidden="true"
         className="fixed top-0 left-0 h-6 w-6 object-contain pointer-events-none"
         style={{
           willChange: "transform",

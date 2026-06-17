@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { HiMenu, HiX } from 'react-icons/hi'
-import { HiMoon, HiSun } from 'react-icons/hi2'
 import { FiDownload } from 'react-icons/fi'
 
 const navLinks = [

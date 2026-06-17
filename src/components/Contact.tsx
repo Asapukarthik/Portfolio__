@@ -3,6 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { FaEnvelope, FaGithub, FaLinkedin, FaPhone } from 'react-icons/fa'
 import { FiSend } from 'react-icons/fi'
 import MagneticButton from './MagneticButton'
+import { GlowCard, GlowPanel } from './GlowCard'
+import { createMutedGlow } from '../utils/glowHover'
+
+const CONTACT_GLOW = 'rgba(139, 92, 246, 0.25)'
+const contactHover = createMutedGlow(CONTACT_GLOW)
 
 const contactLinks = [
   {
@@ -167,35 +172,18 @@ function Contact() {
 
         <div className="grid gap-8 md:grid-cols-2">
           {/* Contact Info */}
-          <motion.div
+          <GlowCard
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="flex flex-col justify-center items-center rounded-2xl border border-white/[0.08] bg-white/[0.02] p-8 relative overflow-hidden group"
-            style={{
-              transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(139, 92, 246, 0.45)';
-              e.currentTarget.style.boxShadow = '0 0 35px rgba(139, 92, 246, 0.12)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
+            glow={CONTACT_GLOW}
+            hover={contactHover}
+            solidBg={false}
+            ambient={{ bottomHover: 70, topHover: 50 }}
+            className="flex flex-col justify-center items-center rounded-2xl border bg-white/[0.02] p-8"
           >
-            {/* Double Blurred Ambient Glows */}
-            <div
-              className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full opacity-0 blur-[80px] transition-opacity duration-700 group-hover:opacity-70 pointer-events-none -z-10"
-              style={{ background: 'radial-gradient(circle, rgba(139, 92, 246, 0.45), transparent 70%)' }}
-            />
-            <div
-              className="absolute -top-24 -right-24 h-64 w-64 rounded-full opacity-0 blur-[80px] transition-opacity duration-700 group-hover:opacity-50 pointer-events-none -z-10"
-              style={{ background: 'radial-gradient(circle, rgba(139, 92, 246, 0.25), transparent 70%)' }}
-            />
-
-            <h3 className="mb-10 text-xs font-bold uppercase tracking-widest text-slate-400 text-center">
+            <h3 className="relative z-10 mb-10 text-xs font-bold uppercase tracking-widest text-slate-400 text-center">
               CONTACT METHOD ICONS
             </h3>
 
@@ -234,7 +222,7 @@ function Contact() {
             </div>
 
             {/* Dynamic Active Description text */}
-            <div className="h-8 flex items-center justify-center">
+            <div className="relative z-10 h-8 flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.p
                   key={activeMethod ? activeMethod.label : 'default'}
@@ -248,37 +236,18 @@ function Contact() {
                 </motion.p>
               </AnimatePresence>
             </div>
-          </motion.div>
+          </GlowCard>
 
-          {/* Contact Form */}
-          <motion.form
+          <GlowPanel
             onSubmit={handleSubmit}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="space-y-4 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-8 relative overflow-hidden group"
-            style={{
-              transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(139, 92, 246, 0.45)';
-              e.currentTarget.style.boxShadow = '0 0 35px rgba(139, 92, 246, 0.12)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
+            glow={CONTACT_GLOW}
+            hover={contactHover}
+            className="space-y-4 rounded-2xl border bg-white/[0.02] p-8"
           >
-            {/* Double Blurred Ambient Glows */}
-            <div
-              className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full opacity-0 blur-[80px] transition-opacity duration-700 group-hover:opacity-70 pointer-events-none -z-10"
-              style={{ background: 'radial-gradient(circle, rgba(139, 92, 246, 0.45), transparent 70%)' }}
-            />
-            <div
-              className="absolute -top-24 -right-24 h-64 w-64 rounded-full opacity-0 blur-[80px] transition-opacity duration-700 group-hover:opacity-50 pointer-events-none -z-10"
-              style={{ background: 'radial-gradient(circle, rgba(139, 92, 246, 0.25), transparent 70%)' }}
-            />
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <input
                 type="text"
@@ -338,7 +307,7 @@ function Contact() {
               {status.submitting ? 'Sending...' : 'Send Message'}
               <FiSend className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" size={16} />
             </MagneticButton>
-          </motion.form>
+          </GlowPanel>
         </div>
       </motion.div>
     </section>

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
 import { FiArrowRight } from 'react-icons/fi'
-import profileImg from '../assets/profile .jpg'
+import profileImg from '../assets/profile_image.jpg'
 import BackgroundSphere from './BackgroundSphere'
 
 const roles = ['Full Stack Developer', 'MERN Enthusiast', 'ML Enthusiast', "Data Science Enthusiast"]
 const socialLinks = [
-  { icon: FaGithub, href: 'https://github.com/asapukarthik', label: 'GitHub' },
+  { icon: FaGithub, href: 'https://github.com/Asapukarthik', label: 'GitHub' },
   { icon: FaLinkedin, href: 'https://www.linkedin.com/in/venkata-veera-hanuma-karthik-asapu-78ba6a256/', label: 'LinkedIn' },
   { icon: FaEnvelope, href: 'mailto:karthikasapu21@gmail.com', label: 'Email' },
 ]

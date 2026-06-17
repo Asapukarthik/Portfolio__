@@ -25,13 +25,22 @@ body {
     radial-gradient(circle at 100% 100%, rgba(157, 0, 255, 0.1), transparent 40%),
     var(--bg-dark);
   color: #f8fafc;
-  cursor: none;
   overflow-x: clip;
 }
 
-@media (min-width: 768px) {
-  *, *::before, *::after {
+@media (min-width: 768px) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  body *, body *::before, body *::after {
     cursor: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body, body *, body *::before, body *::after {
+    cursor: auto !important;
   }
 }
 

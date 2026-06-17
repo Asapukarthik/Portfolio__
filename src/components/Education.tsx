@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import { educations } from '../data/experience'
+import { GlowCard } from './GlowCard'
+import { createMutedGlow } from '../utils/glowHover'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -63,33 +65,11 @@ function Education() {
                 </div>
 
                 {/* Card */}
-                <div
-                  className="relative flex-1 rounded-2xl border border-white/[0.08] p-8 transition-all duration-500 overflow-hidden"
-                  style={{
-                    transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = item.glow.replace('0.25', '0.45');
-                    e.currentTarget.style.boxShadow = `0 0 35px ${item.glow.replace('0.25', '0.15')}`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
+                <GlowCard
+                  glow={item.glow}
+                  hover={createMutedGlow(item.glow)}
+                  className="flex-1 rounded-2xl border p-8"
                 >
-                  {/* Opaque Solid Background - Space Indigo to prevent blending with pure black body */}
-                  <div className="absolute inset-0 -z-20 bg-[#0e0e16] transition-colors duration-500 group-hover:bg-[#151522]" />
-
-                  {/* Double Blurred Ambient Glows */}
-                  <div
-                    className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full opacity-0 blur-[80px] transition-opacity duration-700 group-hover:opacity-75 pointer-events-none -z-10"
-                    style={{ background: `radial-gradient(circle, ${item.glow.replace('0.25', '0.45')}, transparent 70%)` }}
-                  />
-                  <div
-                    className="absolute -top-24 -right-24 h-64 w-64 rounded-full opacity-0 blur-[80px] transition-opacity duration-700 group-hover:opacity-55 pointer-events-none -z-10"
-                    style={{ background: `radial-gradient(circle, ${item.glow.replace('0.25', '0.25')}, transparent 70%)` }}
-                  />
-
                   <div className="relative z-10 flex flex-col justify-between gap-4 md:flex-row md:items-start">
                     <div className="flex items-start gap-4">
                       {/* Icon */}
@@ -120,7 +100,7 @@ function Education() {
                       {item.description}
                     </p>
                   )}
-                </div>
+                </GlowCard>
               </motion.div>
             ))}
           </div>

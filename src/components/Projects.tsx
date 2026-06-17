@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { projects } from '../data/projects'
 import { FiExternalLink, FiGithub } from 'react-icons/fi'
+import { GlowAmbientLayers, withGlowAlpha } from './GlowCard'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -94,21 +95,22 @@ function ProjectCard({ project }: ProjectCardProps) {
       onMouseLeave={handleMouseLeave}
     >
       {/* Opaque Solid Background - Space Indigo to prevent blending with pure black body */}
-      <div className="absolute inset-0 -z-20 bg-[#0e0e16] transition-colors duration-500 group-hover:bg-[#151522]" />
+      <div className={`absolute inset-0 -z-20 bg-[#0e0e16] transition-colors duration-500 ${isHovered ? 'bg-[#151522]' : ''}`} />
+
+      <GlowAmbientLayers
+        glow={project.glow}
+        solidBg={false}
+        isHovered={isHovered}
+        ambient={{ bottomBase: 0, topBase: 0, bottomHover: 60, topHover: 25 }}
+      />
 
       {/* Dynamic Cursor-Tracking Glow Spot (Shine effect) */}
       <div
         className="absolute inset-0 pointer-events-none -z-10 transition-opacity duration-500"
         style={{
           opacity: isHovered ? 0.85 : 0.25,
-          background: `radial-gradient(circle 180px at ${glowPos.x}% ${glowPos.y}%, ${project.glow.replace('0.25', '0.22')}, transparent 80%)`
+          background: `radial-gradient(circle 180px at ${glowPos.x}% ${glowPos.y}%, ${withGlowAlpha(project.glow, 0.22)}, transparent 80%)`
         }}
-      />
-
-      {/* Additional Deep Static Glows for double layer lighting */}
-      <div
-        className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full opacity-10 blur-[80px] transition-opacity duration-700 group-hover:opacity-60 pointer-events-none -z-10"
-        style={{ background: `radial-gradient(circle, ${project.glow.replace('0.25', '0.4')}, transparent 70%)` }}
       />
 
       {/* Image Container */}
